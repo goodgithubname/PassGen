@@ -10,32 +10,75 @@
     </div>
 
     <script>
-      function generatePassword(minLength, maxLength) {
-        var length =
-          Math.floor(Math.random() * (maxLength - minLength + 1)) + minLength;
+      window.onload = function () {
+        var passwordElement = document.getElementById("password");
 
-        var allCharacters =
-          "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+~`|}{[]:;?><,./-=";
-        var passwordCharacters = [
-          allCharacters[Math.floor(Math.random() * 26) + 26], // a random lowercase letter
-          allCharacters[Math.floor(Math.random() * 26)], // a random uppercase letter
-          allCharacters[Math.floor(Math.random() * 10) + 52], // a random digit
-        ];
+        function generatePassword(minLength, maxLength) {
+          var length =
+            Math.floor(Math.random() * (maxLength - minLength + 1)) + minLength;
 
-        for (var i = 0; i < length - 3; i++) {
-          passwordCharacters.push(
-            allCharacters[Math.floor(Math.random() * allCharacters.length)]
-          );
+          var allCharacters =
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+~`|}{[]:;?><,./-=";
+          var passwordCharacters = [
+            allCharacters[Math.floor(Math.random() * 26) + 26], // a random lowercase letter
+            allCharacters[Math.floor(Math.random() * 26)], // a random uppercase letter
+            allCharacters[Math.floor(Math.random() * 10) + 52], // a random digit
+          ];
+
+          for (var i = 0; i < length - 3; i++) {
+            passwordCharacters.push(
+              allCharacters[Math.floor(Math.random() * allCharacters.length)]
+            );
+          }
+
+          passwordCharacters.sort(function () {
+            return 0.5 - Math.random();
+          }); // shuffle the array
+
+          return passwordCharacters.join("");
         }
 
-        passwordCharacters.sort(function () {
-          return 0.5 - Math.random();
-        }); // shuffle the array
+        var password = generatePassword(12, 20);
+        passwordElement.innerHTML = "";
+        for (var i = 0; i < password.length; i++) {
+          var span = document.createElement("span");
+          span.textContent = password[i];
+          passwordElement.appendChild(span);
+        }
 
-        return passwordCharacters.join("");
-      }
+        passwordElement.addEventListener("mousemove", function (e) {
+          var rect = passwordElement.getBoundingClientRect();
+          var x = e.clientX - rect.left; // x position within the element
+          var spans = passwordElement.getElementsByTagName("span");
+          var minDistance = Number.MAX_VALUE;
+          var closestSpan = null;
+          for (var i = 0; i < spans.length; i++) {
+            var spanX =
+              spans[i].getBoundingClientRect().left -
+              rect.left +
+              spans[i].offsetWidth / 2;
+            var distance = Math.abs(x - spanX);
+            if (distance < minDistance) {
+              minDistance = distance;
+              closestSpan = spans[i];
+            }
+          }
+          for (var i = 0; i < spans.length; i++) {
+            if (spans[i] === closestSpan) {
+              spans[i].classList.add("up");
+            } else {
+              spans[i].classList.remove("up");
+            }
+          }
+        });
 
-      document.getElementById("password").innerText = generatePassword(12, 20);
+        passwordElement.addEventListener("mouseleave", function () {
+          var spans = passwordElement.getElementsByTagName("span");
+          for (var i = 0; i < spans.length; i++) {
+            spans[i].classList.remove("up");
+          }
+        });
+      };
     </script>
   </body>
 </html>

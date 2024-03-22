@@ -14,7 +14,7 @@ h2, p {
 }
 
 .spectrum {
-    animation: spectrum 2s infinite linear;
+    animation: spectrum 5s infinite linear;
 }
 
 @keyframes spectrum {
@@ -27,3 +27,9 @@ h2, p {
     85% { color: purple; }
     100% { color: red; }
 }
+
+.up {
+    position: relative;
+    top: -20px;
+    transition: top 1s;
+  }
