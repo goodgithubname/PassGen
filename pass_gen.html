@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h2>Generated Password:</h2>
+    <p id="password"></p>
+
+    <script>
+        function generatePassword(length) {
+            var allCharacters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+~`|}{[]:;?><,./-=';
+            var passwordCharacters = [
+                allCharacters[Math.floor(Math.random() * 26) + 26], // a random lowercase letter
+                allCharacters[Math.floor(Math.random() * 26)], // a random uppercase letter
+                allCharacters[Math.floor(Math.random() * 10) + 52], // a random digit
+            ];
+
+            for (var i = 0; i < length - 3; i++) {
+                passwordCharacters.push(allCharacters[Math.floor(Math.random() * allCharacters.length)]);
+            }
+
+            passwordCharacters.sort(function() { return 0.5 - Math.random() }); // shuffle the array
+
+            return passwordCharacters.join('');
+        }
+
+        document.getElementById('password').innerText = generatePassword(12);
+    </script>
+</body>
+</html>
