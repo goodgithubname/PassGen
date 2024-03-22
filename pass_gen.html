@@ -5,7 +5,9 @@
     <p id="password"></p>
 
     <script>
-        function generatePassword(length) {
+        function generatePassword(minLength, maxLength) {
+            var length = Math.floor(Math.random() * (maxLength - minLength + 1)) + minLength;
+
             var allCharacters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+~`|}{[]:;?><,./-=';
             var passwordCharacters = [
                 allCharacters[Math.floor(Math.random() * 26) + 26], // a random lowercase letter
@@ -22,7 +24,7 @@
             return passwordCharacters.join('');
         }
 
-        document.getElementById('password').innerText = generatePassword(12);
+        document.getElementById('password').innerText = generatePassword(12, 20);
     </script>
 </body>
 </html>
