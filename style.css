@@ -1,3 +1,29 @@
 body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
     background-color: #1e1e1e;
+    color: #E0E0E0;
+    font-family: Arial, sans-serif;
+}
+
+h2, p {
+    text-align: center;
+}
+
+.spectrum {
+    animation: spectrum 2s infinite linear;
+}
+
+@keyframes spectrum {
+    0% { color: red; }
+    14% { color: orange; }
+    28% { color: yellow; }
+    42% { color: lime; }
+    57% { color: cyan; }
+    71% { color: blue; }
+    85% { color: purple; }
+    100% { color: red; }
 }
