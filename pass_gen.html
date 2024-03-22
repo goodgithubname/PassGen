@@ -1,30 +1,39 @@
 <!DOCTYPE html>
 <html>
-<body>
-    <h2>Generated Password:</h2>
+  <head>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body>
+    <h2>Generated Password</h2>
     <p id="password"></p>
 
     <script>
-        function generatePassword(minLength, maxLength) {
-            var length = Math.floor(Math.random() * (maxLength - minLength + 1)) + minLength;
+      function generatePassword(minLength, maxLength) {
+        var length =
+          Math.floor(Math.random() * (maxLength - minLength + 1)) + minLength;
 
-            var allCharacters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+~`|}{[]:;?><,./-=';
-            var passwordCharacters = [
-                allCharacters[Math.floor(Math.random() * 26) + 26], // a random lowercase letter
-                allCharacters[Math.floor(Math.random() * 26)], // a random uppercase letter
-                allCharacters[Math.floor(Math.random() * 10) + 52], // a random digit
-            ];
+        var allCharacters =
+          "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+~`|}{[]:;?><,./-=";
+        var passwordCharacters = [
+          allCharacters[Math.floor(Math.random() * 26) + 26], // a random lowercase letter
+          allCharacters[Math.floor(Math.random() * 26)], // a random uppercase letter
+          allCharacters[Math.floor(Math.random() * 10) + 52], // a random digit
+        ];
 
-            for (var i = 0; i < length - 3; i++) {
-                passwordCharacters.push(allCharacters[Math.floor(Math.random() * allCharacters.length)]);
-            }
-
-            passwordCharacters.sort(function() { return 0.5 - Math.random() }); // shuffle the array
-
-            return passwordCharacters.join('');
+        for (var i = 0; i < length - 3; i++) {
+          passwordCharacters.push(
+            allCharacters[Math.floor(Math.random() * allCharacters.length)]
+          );
         }
 
-        document.getElementById('password').innerText = generatePassword(12, 20);
+        passwordCharacters.sort(function () {
+          return 0.5 - Math.random();
+        }); // shuffle the array
+
+        return passwordCharacters.join("");
+      }
+
+      document.getElementById("password").innerText = generatePassword(12, 20);
     </script>
-</body>
+  </body>
 </html>
